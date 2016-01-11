@@ -1,4 +1,4 @@
-from urlparse import urlparse
+from urlparse3 import urlparse3
 import cStringIO
 import mimetypes
 import os
@@ -18,7 +18,7 @@ class S3File(object):
         from boto.s3.connection import S3Connection
         from boto.s3.key import Key
 
-        self.url = urlparse(url)
+        self.url = urlparse3(url)
         self.expiration_days = expiration_days
         self.buffer = cStringIO.StringIO()
 
@@ -94,6 +94,9 @@ class S3File(object):
 
     def flush(self):
         self._remote_write()
+
+    def fileno(self):
+        return 3
 
     def next(self):
         self._remote_read()
