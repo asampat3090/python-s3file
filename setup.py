@@ -1,7 +1,8 @@
 from setuptools import setup
 from s3file import __version__
 
-long_description = open('README.rst').read()
+# fix this issue
+#long_description = open('README.rst').read()
 
 setup(
     name="python-s3file",
@@ -11,9 +12,9 @@ setup(
     author_email = "jcarbaugh@gmail.com",
     license='BSD',
     url="http://github.com/jcarbaugh/python-s3file/",
-    long_description=long_description,
+    long_description='please see README.rst',
     py_modules=["s3file"],
-    install_requires=['boto==2.24.0'],
+    install_requires=['boto'],
     platforms=["any"],
     classifiers=[
         "Development Status :: 4 - Beta",

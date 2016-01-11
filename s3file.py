@@ -1,7 +1,11 @@
-from urlparse3 import urlparse3
-import cStringIO
+import os, sys
+if sys.version_info < (3, 0):
+    from urlparse import urlparse
+    import cStringIO
+else:
+    from urlparse3 import urlparse3
+    from io import StringIO
 import mimetypes
-import os
 import datetime
 
 __version__ = '1.3'
@@ -18,9 +22,14 @@ class S3File(object):
         from boto.s3.connection import S3Connection
         from boto.s3.key import Key
 
-        self.url = urlparse3(url)
+        if sys.version_info < (3, 0):
+            self.url = urlparse(url)
+            self.buffer = cStringIO.StringIO()
+        else:
+            self.url = urlparse3(url)
+            self.buffer = StringIO()
+
         self.expiration_days = expiration_days
-        self.buffer = cStringIO.StringIO()
 
         self.private = private
         self.closed = False
